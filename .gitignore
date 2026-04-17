@@ -29,3 +29,9 @@ Temporary Items
 ### macOS Patch ###
 # iCloud generated files
 *.icloud
+
+### Claude ###
+.claude/
+CLAUDE.md
+.claude.json
+.mcp.json
