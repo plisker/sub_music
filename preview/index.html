@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>music.lisker.me — redesign previews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600&display=swap" />
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+        .landing {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        .landing h1 {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            color: var(--ink);
+            margin: 1rem 0 0.5rem;
+        }
+
+        .landing .lede {
+            font-family: var(--serif);
+            font-style: italic;
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin: 0 0 2.5rem;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .options a {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            padding: 1.25rem 1.4rem;
+            border: 1px solid var(--hairline);
+            border-radius: 3px;
+            transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+        }
+
+        .options a:hover {
+            background: var(--bg-tint);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .options .opt-title {
+            font-family: var(--serif);
+            font-size: 1.35rem;
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .options .opt-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .options .opt-desc {
+            color: var(--body);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="glyph">
+        <a href="https://lisker.me" aria-label="Home — Paul Lisker">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 3l8-1.5v13.2a4.2 4.2 0 1 1-2-3.58V5.82l-6 1.13v10.35A4.2 4.2 0 1 1 10 14.12V3z" />
+            </svg>
+        </a>
+    </header>
+
+    <main class="landing">
+        <h1>music.lisker.me redesign</h1>
+        <p class="lede">Three directions to compare. Each keeps all 15 recordings, drops the kitschy overlays, and borrows the warm, serif-driven feel from the Photos site.</p>
+
+        <ul class="options">
+            <li><a href="option-a.html">
+                <span class="opt-title">Option A &mdash; <em>Editorial list</em></span>
+                <span class="opt-desc">Most minimal. A single typographic list; four atmospheric session photos at the bottom. Closest to Photos' restrained typography.</span>
+            </a></li>
+            <li><a href="option-b.html">
+                <span class="opt-title">Option B &mdash; <em>Sessions gallery + cards</em></span>
+                <span class="opt-desc">Most Photos-site-like. Six captioned session tiles up top, then a two-column card grid for the full catalog. Strongest image presence.</span>
+            </a></li>
+            <li><a href="option-c.html">
+                <span class="opt-title">Option C &mdash; <em>Timeline</em></span>
+                <span class="opt-desc">Most editorial. Recordings grouped by year (2020 &rarr; 2014), one photo per year. Tells the seven-year hobby-arc story.</span>
+            </a></li>
+        </ul>
+    </main>
+
+    <footer class="site-footer">
+        <p class="meta">Prototype index &mdash; not deployed. The current live page is at <a href="https://music.lisker.me">music.lisker.me</a>.</p>
+    </footer>
+</body>
+
+</html>

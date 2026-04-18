@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paul Lisker | Music — Option B (Gallery + cards)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+        .intro {
+            max-width: 640px;
+            font-size: 1.05rem;
+            color: var(--body);
+            margin: 0 0 2.5rem;
+        }
+
+        /* Sessions gallery — Photos-site-style image tiles */
+        .sessions {
+            margin: 0 0 3rem;
+        }
+
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 600px) {
+            .sessions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 1fr;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .sessions-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .sessions-grid .tile {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            border-radius: 3px;
+            background: var(--bg-tile);
+            display: block;
+            cursor: default;
+        }
+
+        .sessions-grid .tile.tall {
+            aspect-ratio: 4 / 5;
+        }
+
+        .sessions-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.9);
+            transition: transform 500ms ease, filter 500ms ease;
+        }
+
+        .sessions-grid .tile:hover img {
+            transform: scale(1.04);
+            filter: saturate(1);
+        }
+
+        .sessions-grid .tile::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.45) 100%);
+            pointer-events: none;
+        }
+
+        .sessions-grid figcaption {
+            position: absolute;
+            left: 1rem;
+            right: 1rem;
+            bottom: 0.85rem;
+            color: #fdf8ec;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.15rem;
+            letter-spacing: 0.005em;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+            line-height: 1.3;
+            z-index: 1;
+        }
+
+        /* Recording cards */
+        .cards {
+            list-style: none;
+            margin: 0 0 3rem;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.85rem;
+        }
+
+        @media (min-width: 680px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        .cards a {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding: 1.15rem 1.25rem 1.1rem;
+            border: 1px solid var(--hairline);
+            border-radius: 3px;
+            background: transparent;
+            height: 100%;
+            min-height: 130px;
+            transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+        }
+
+        .cards a:hover {
+            background: var(--bg-tint);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .cards .card-title {
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.4rem;
+            color: var(--ink);
+            line-height: 1.2;
+            letter-spacing: 0.005em;
+        }
+
+        .cards .card-meta {
+            color: var(--body);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            flex: 1 1 auto;
+        }
+
+        .cards .card-meta b {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .cards .card-meta .sep {
+            color: var(--muted);
+            opacity: 0.55;
+            margin: 0 0.4rem;
+        }
+
+        .cards .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-top: 0.1rem;
+        }
+
+        .cards .card-date {
+            color: var(--muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+        }
+
+        .cards .card-platform {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            white-space: nowrap;
+            font-weight: 600;
+            transition: color 180ms ease;
+        }
+
+        .cards a:hover .card-platform {
+            color: var(--accent);
+        }
+
+        .cards .card-platform i {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="glyph">
+        <a href="https://lisker.me" aria-label="Home — Paul Lisker">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 3l8-1.5v13.2a4.2 4.2 0 1 1-2-3.58V5.82l-6 1.13v10.35A4.2 4.2 0 1 1 10 14.12V3z" />
+            </svg>
+        </a>
+    </header>
+
+    <nav class="proto-switch" aria-label="Prototype switcher">
+        <a href="option-a.html">A · List</a>
+        <a href="option-b.html" aria-current="page">B · Gallery</a>
+        <a href="option-c.html">C · Timeline</a>
+    </nav>
+
+    <div class="shell">
+        <aside class="sidebar">
+            <a class="name" href="https://lisker.me">Paul Lisker</a>
+            <div class="page-label">Music</div>
+            <p class="tagline">
+                Covers with my sisters, live performances, and a few quieter experiments.
+                <a class="home-link" href="https://lisker.me">About Me</a>
+            </p>
+            <ul class="socials" aria-label="Social links">
+                <li><a href="https://www.linkedin.com/in/paullisker/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                <li><a href="https://soundcloud.com/paul-lisker" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i></a></li>
+                <li><a href="https://www.last.fm/user/paullisker" target="_blank" rel="noopener noreferrer" aria-label="Last.fm"><i class="fa-brands fa-lastfm" aria-hidden="true"></i></a></li>
+                <li><a href="https://medium.com/@paullisker" target="_blank" rel="noopener noreferrer" aria-label="Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
+                <li><a href="mailto:music@lisker.me" aria-label="Email"><i class="fa-regular fa-envelope" aria-hidden="true"></i></a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Music</h1>
+            <p class="intro">
+                I can often be found experimenting with an instrument or searching for new music, and I <a href="https://medium.com/@paullisker/building-an-electric-guitar-3c85616dc85b" target="_blank" rel="noopener noreferrer">built my own electric guitar</a>. For listening habits there's <a href="https://www.last.fm/user/paullisker" target="_blank" rel="noopener noreferrer">Last.fm</a> and a few <a href="https://open.spotify.com/user/paul.lisker" target="_blank" rel="noopener noreferrer">Spotify playlists</a>. Below, a few sessions and the full catalog of what I've recorded.
+            </p>
+
+            <section class="sessions" aria-label="Sessions">
+                <h2>Sessions</h2>
+                <div class="sessions-grid">
+                    <figure class="tile"><img src="../images/music/liability.jpg" alt="" /><figcaption>With Karyn, Brooklyn</figcaption></figure>
+                    <figure class="tile"><img src="../images/music/karyn-voice-recital.jpg" alt="" /><figcaption>Karyn's Recital</figcaption></figure>
+                    <figure class="tile"><img src="../images/music/ian-miller.jpg" alt="" /><figcaption>Ian Miller, Live</figcaption></figure>
+                    <figure class="tile"><img src="../images/music/you-and-i.jpg" alt="" /><figcaption>Sibling Recordings</figcaption></figure>
+                    <figure class="tile"><img src="../images/music/sixty-four.jpg" alt="" /><figcaption>For Dad's 64th</figcaption></figure>
+                    <figure class="tile"><img src="../images/music/acoustic.jpg" alt="" /><figcaption>In the Studio</figcaption></figure>
+                </div>
+            </section>
+
+            <h2>All Recordings</h2>
+            <ol class="cards" aria-label="All recordings">
+                <li><a href="https://www.youtube.com/watch?v=fKFrbJlGxUE" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Halloween</span>
+                    <span class="card-meta">original by <b>Phoebe Bridgers</b><span class="sep">·</span>with Karyn</span>
+                    <span class="card-footer"><span class="card-date">June 2020</span><span class="card-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span></span>
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=-castPnfj8A" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">First Day of My Life</span>
+                    <span class="card-meta">original by <b>Bright Eyes</b><span class="sep">·</span>with Karyn</span>
+                    <span class="card-footer"><span class="card-date">June 2020</span><span class="card-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span></span>
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=FrLb7k3yHFI" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Karma Police</span>
+                    <span class="card-meta">original by <b>Radiohead</b><span class="sep">·</span>with Karyn</span>
+                    <span class="card-footer"><span class="card-date">June 2020</span><span class="card-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span></span>
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=bvCJ0S2jVBk" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Liability</span>
+                    <span class="card-meta">original by <b>Lorde</b><span class="sep">·</span>with Claire, impromptu live</span>
+                    <span class="card-footer"><span class="card-date">May 2019</span><span class="card-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span></span>
+                </a></li>
+                <li><a href="https://soundcloud.com/paul-lisker/when-im-sixty-four-backing-track" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">When I'm Sixty-Four</span>
+                    <span class="card-meta">original by <b>The Beatles</b><span class="sep">·</span>instrumental, for Dad's 64th</span>
+                    <span class="card-footer"><span class="card-date">Mar&ndash;Apr 2019</span><span class="card-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span></span>
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=6HbqHM8qkY4" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">You and I</span>
+                    <span class="card-meta">original by <b>Ingrid Michaelson</b><span class="sep">·</span>with Karyn, impromptu live</span>
+                    <span class="card-footer"><span class="card-date">October 2018</span><span class="card-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span></span>
+                </a></li>
+                <li><a href="https://soundcloud.com/karyn-lisker/private-voice-recital-7-8-2018" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Private Voice Recital</span>
+                    <span class="card-meta"><b>Karyn Lisker</b>, live recital of classical works</span>
+                    <span class="card-footer"><span class="card-date">July 2018</span><span class="card-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span></span>
+                </a></li>
+                <li><a href="https://soundcloud.com/musicianmiller/seasons-live?in=musicianmiller/sets/originals" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Seasons</span>
+                    <span class="card-meta"><b>Ian Miller</b> original<span class="sep">·</span>live</span>
+                    <span class="card-footer"><span class="card-date">February 2018</span><span class="card-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span></span>
+                </a></li>
+                <li><a href="https://soundcloud.com/paul-lisker/present-tense?in=paul-lisker/sets/lisker-sibling-recordings" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Present Tense</span>
+                    <span class="card-meta">original by <b>Radiohead</b><span class="sep">·</span>with Karyn</span>
+                    <span class="card-footer"><span class="card-date">June 2017</span><span class="card-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span></span>
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=M7q3tlrjzb4" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Baby Blue</span>
+                    <span class="card-meta">original by <b>Tor Miller</b><span class="sep">·</span>with Claire</span>
+                    <span class="card-footer"><span class="card-date">August 2016</span><span class="card-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span></span>
+                </a></li>
+                <li><a href="https://www.youtube.com/watch?v=VSEL4dpaJuo" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Human of the Year</span>
+                    <span class="card-meta">original by <b>Regina Spektor</b><span class="sep">·</span>with Claire</span>
+                    <span class="card-footer"><span class="card-date">January 2016</span><span class="card-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span></span>
+                </a></li>
+                <li><a href="https://soundcloud.com/paul-lisker/til-the-casket-drops" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Til the Casket Drops</span>
+                    <span class="card-meta">original by <b>ZZ Ward</b><span class="sep">·</span>with Claire</span>
+                    <span class="card-footer"><span class="card-date">August 2015</span><span class="card-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span></span>
+                </a></li>
+                <li><a href="https://soundcloud.com/paul-lisker/i-know" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">I Know</span>
+                    <span class="card-meta">original by <b>Irma</b><span class="sep">·</span>with Claire</span>
+                    <span class="card-footer"><span class="card-date">August 2015</span><span class="card-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span></span>
+                </a></li>
+                <li><a href="https://soundcloud.com/paul-lisker/brown-sugar-guitar-cover" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Brown Sugar</span>
+                    <span class="card-meta">original by <b>The Rolling Stones</b><span class="sep">·</span>guitar cover</span>
+                    <span class="card-footer"><span class="card-date">June 2015</span><span class="card-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span></span>
+                </a></li>
+                <li><a href="https://soundcloud.com/paul-lisker/titanium" target="_blank" rel="noopener noreferrer">
+                    <span class="card-title">Titanium</span>
+                    <span class="card-meta">original by <b>David Guetta ft. Sia</b><span class="sep">·</span>with Claire</span>
+                    <span class="card-footer"><span class="card-date">May 2014</span><span class="card-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span></span>
+                </a></li>
+            </ol>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <ul class="socials" aria-label="Social links">
+            <li><a href="https://www.linkedin.com/in/paullisker/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+            <li><a href="https://medium.com/@paullisker" target="_blank" rel="noopener noreferrer" aria-label="Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
+            <li><a href="https://soundcloud.com/paul-lisker" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.last.fm/user/paullisker" target="_blank" rel="noopener noreferrer" aria-label="Last.fm"><i class="fa-brands fa-lastfm" aria-hidden="true"></i></a></li>
+            <li><a href="mailto:music@lisker.me" aria-label="Email"><i class="fa-regular fa-envelope" aria-hidden="true"></i></a></li>
+        </ul>
+        <p class="meta">
+            © Paul Lisker. All rights reserved
+            <span class="sep">·</span> <a href="https://lisker.me/privacy_policy">Privacy</a>
+            <span class="sep">·</span> <a href="https://lisker.me/cookie_policy">Cookies</a>
+        </p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paul Lisker | Music — Option C (Timeline)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Roboto:wght@300;400;500;700&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+        .intro {
+            max-width: 620px;
+            margin: 0 0 2rem;
+        }
+
+        .year-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem 0.35rem;
+            margin: 0 0 3.25rem;
+            padding: 0 0 1rem;
+            border-bottom: 1px solid var(--hairline-strong);
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .year-nav a {
+            color: var(--muted);
+            padding: 0.3rem 0.7rem;
+            border-radius: 2px;
+            transition: color 300ms ease, background 300ms ease;
+        }
+
+        .year-nav a:hover {
+            color: var(--accent-hover);
+            background: var(--bg-tint);
+        }
+
+        .year-group {
+            margin: 0 0 3.5rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .year-group + .year-group {
+            border-top: 1px solid var(--hairline-strong);
+            padding-top: 3rem;
+        }
+
+        .year-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .year-head h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            color: var(--ink);
+            font-size: clamp(2.75rem, 7vw, 4rem);
+            line-height: 1;
+            letter-spacing: -0.015em;
+            margin: 0;
+        }
+
+        .year-count {
+            color: var(--muted);
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .year-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 720px) {
+            .year-body {
+                grid-template-columns: 200px 1fr;
+                gap: 2.25rem;
+                align-items: start;
+            }
+        }
+
+        .year-photo {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: var(--bg-tile);
+            max-width: 100%;
+        }
+
+        @media (max-width: 719px) {
+            .year-photo {
+                aspect-ratio: 16 / 10;
+            }
+        }
+
+        .year-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.92);
+            transition: transform 700ms ease, filter 700ms ease;
+        }
+
+        .year-group:hover .year-photo img {
+            filter: saturate(1);
+        }
+
+        /* Tracks */
+        .year-tracks {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border-top: 1px solid var(--hairline);
+        }
+
+        .year-tracks li {
+            border-bottom: 1px solid var(--hairline);
+        }
+
+        .year-tracks a {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-template-areas:
+                "title    platform"
+                "meta     platform";
+            column-gap: 1.25rem;
+            row-gap: 0.25rem;
+            padding: 1.15rem 0.4rem;
+            min-height: 70px;
+            align-items: center;
+            transition: background 300ms ease, padding-left 300ms ease;
+        }
+
+        @media (min-width: 560px) {
+            .year-tracks a {
+                column-gap: 1.75rem;
+                padding: 1.35rem 0.6rem;
+            }
+        }
+
+        .year-tracks a:hover {
+            background: var(--bg-tint);
+            padding-left: 1rem;
+        }
+
+        .track-title {
+            grid-area: title;
+            font-family: var(--serif);
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.35rem;
+            color: var(--ink);
+            line-height: 1.2;
+            align-self: end;
+        }
+
+        .track-meta {
+            grid-area: meta;
+            color: var(--body);
+            font-size: 0.93rem;
+            line-height: 1.5;
+            align-self: start;
+        }
+
+        .track-meta .artist {
+            color: var(--ink);
+            font-weight: 400;
+        }
+
+        .track-meta .dot {
+            color: var(--muted);
+            margin: 0 0.5rem;
+            opacity: 0.75;
+        }
+
+        .track-meta .note {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .track-platform {
+            grid-area: platform;
+            align-self: center;
+            font-family: var(--sans);
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            font-weight: 500;
+            transition: color 300ms ease;
+        }
+
+        .track-platform i {
+            font-size: 1rem;
+        }
+
+        .year-tracks a:hover .track-platform {
+            color: var(--accent-hover);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="glyph">
+        <a href="https://lisker.me" aria-label="Home — Paul Lisker">
+            <i class="fa-solid fa-music" aria-hidden="true"></i>
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+        </a>
+    </header>
+
+    <nav class="proto-switch" aria-label="Prototype switcher">
+        <a href="option-a.html">A · List</a>
+        <a href="option-b.html">B · Gallery</a>
+        <a href="option-c.html" aria-current="page">C · Timeline</a>
+    </nav>
+
+    <div class="shell">
+        <aside class="sidebar">
+            <a class="name" href="https://lisker.me">Paul Lisker</a>
+            <div class="page-label">Music</div>
+            <p class="tagline">
+                Seven years of recordings &mdash; covers, recitals, and live sessions.
+                <a class="home-link" href="https://lisker.me">About Me</a>
+            </p>
+            <ul class="socials" aria-label="Social links">
+                <li><a href="https://www.linkedin.com/in/paullisker/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                <li><a href="https://soundcloud.com/paul-lisker" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i></a></li>
+                <li><a href="https://www.last.fm/user/paullisker" target="_blank" rel="noopener noreferrer" aria-label="Last.fm"><i class="fa-brands fa-lastfm" aria-hidden="true"></i></a></li>
+                <li><a href="https://medium.com/@paullisker" target="_blank" rel="noopener noreferrer" aria-label="Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
+                <li><a href="mailto:music@lisker.me" aria-label="Email"><i class="fa-regular fa-envelope" aria-hidden="true"></i></a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Recordings</h1>
+            <p class="intro">
+                Covers with my sisters <span class="artist">Claire</span> and <span class="artist">Karyn</span>, and a few live recordings for friends. I also <a href="https://medium.com/@paullisker/building-an-electric-guitar-3c85616dc85b" target="_blank" rel="noopener noreferrer">built my own electric guitar</a>, and you can follow my listening on <a href="https://www.last.fm/user/paullisker" target="_blank" rel="noopener noreferrer">Last.fm</a> or <a href="https://open.spotify.com/user/paul.lisker" target="_blank" rel="noopener noreferrer">Spotify</a>.
+            </p>
+
+            <nav class="year-nav" aria-label="Jump to year">
+                <a href="#y2020">2020</a>
+                <a href="#y2019">2019</a>
+                <a href="#y2018">2018</a>
+                <a href="#y2017">2017</a>
+                <a href="#y2016">2016</a>
+                <a href="#y2015">2015</a>
+                <a href="#y2014">2014</a>
+            </nav>
+
+            <section class="year-group" id="y2020">
+                <header class="year-head">
+                    <h2>2020</h2>
+                    <span class="year-count">3 recordings</span>
+                </header>
+                <div class="year-body">
+                    <div class="year-photo"><img src="../images/music/liability.jpg" alt="" /></div>
+                    <ol class="year-tracks">
+                        <li><a href="https://www.youtube.com/watch?v=fKFrbJlGxUE" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Halloween</span>
+                            <span class="track-meta"><span class="artist">Phoebe Bridgers</span><span class="dot">·</span>with Karyn</span>
+                            <span class="track-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span>
+                        </a></li>
+                        <li><a href="https://www.youtube.com/watch?v=-castPnfj8A" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">First Day of My Life</span>
+                            <span class="track-meta"><span class="artist">Bright Eyes</span><span class="dot">·</span>with Karyn</span>
+                            <span class="track-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span>
+                        </a></li>
+                        <li><a href="https://www.youtube.com/watch?v=FrLb7k3yHFI" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Karma Police</span>
+                            <span class="track-meta"><span class="artist">Radiohead</span><span class="dot">·</span>with Karyn</span>
+                            <span class="track-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span>
+                        </a></li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="year-group" id="y2019">
+                <header class="year-head">
+                    <h2>2019</h2>
+                    <span class="year-count">2 recordings</span>
+                </header>
+                <div class="year-body">
+                    <div class="year-photo"><img src="../images/music/sixty-four.jpg" alt="" /></div>
+                    <ol class="year-tracks">
+                        <li><a href="https://www.youtube.com/watch?v=bvCJ0S2jVBk" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Liability</span>
+                            <span class="track-meta"><span class="artist">Lorde</span><span class="dot">·</span>with Claire<span class="dot">·</span><span class="note">impromptu live</span></span>
+                            <span class="track-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span>
+                        </a></li>
+                        <li><a href="https://soundcloud.com/paul-lisker/when-im-sixty-four-backing-track" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">When I'm Sixty-Four</span>
+                            <span class="track-meta"><span class="artist">The Beatles</span><span class="dot">·</span><span class="note">instrumental, for Dad's 64th</span></span>
+                            <span class="track-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span>
+                        </a></li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="year-group" id="y2018">
+                <header class="year-head">
+                    <h2>2018</h2>
+                    <span class="year-count">3 recordings</span>
+                </header>
+                <div class="year-body">
+                    <div class="year-photo"><img src="../images/music/karyn-voice-recital.jpg" alt="" /></div>
+                    <ol class="year-tracks">
+                        <li><a href="https://www.youtube.com/watch?v=6HbqHM8qkY4" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">You and I</span>
+                            <span class="track-meta"><span class="artist">Ingrid Michaelson</span><span class="dot">·</span>with Karyn<span class="dot">·</span><span class="note">impromptu live</span></span>
+                            <span class="track-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span>
+                        </a></li>
+                        <li><a href="https://soundcloud.com/karyn-lisker/private-voice-recital-7-8-2018" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Private Voice Recital</span>
+                            <span class="track-meta"><span class="artist">Karyn Lisker</span><span class="dot">·</span><span class="note">live recital, classical works</span></span>
+                            <span class="track-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span>
+                        </a></li>
+                        <li><a href="https://soundcloud.com/musicianmiller/seasons-live?in=musicianmiller/sets/originals" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Seasons</span>
+                            <span class="track-meta"><span class="artist">Ian Miller</span><span class="dot">·</span><span class="note">original, live</span></span>
+                            <span class="track-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span>
+                        </a></li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="year-group" id="y2017">
+                <header class="year-head">
+                    <h2>2017</h2>
+                    <span class="year-count">1 recording</span>
+                </header>
+                <div class="year-body">
+                    <div class="year-photo"><img src="../images/music/present-tense.jpg" alt="" /></div>
+                    <ol class="year-tracks">
+                        <li><a href="https://soundcloud.com/paul-lisker/present-tense?in=paul-lisker/sets/lisker-sibling-recordings" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Present Tense</span>
+                            <span class="track-meta"><span class="artist">Radiohead</span><span class="dot">·</span>with Karyn</span>
+                            <span class="track-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span>
+                        </a></li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="year-group" id="y2016">
+                <header class="year-head">
+                    <h2>2016</h2>
+                    <span class="year-count">2 recordings</span>
+                </header>
+                <div class="year-body">
+                    <div class="year-photo"><img src="../images/music/baby-blue.jpg" alt="" /></div>
+                    <ol class="year-tracks">
+                        <li><a href="https://www.youtube.com/watch?v=M7q3tlrjzb4" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Baby Blue</span>
+                            <span class="track-meta"><span class="artist">Tor Miller</span><span class="dot">·</span>with Claire</span>
+                            <span class="track-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span>
+                        </a></li>
+                        <li><a href="https://www.youtube.com/watch?v=VSEL4dpaJuo" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Human of the Year</span>
+                            <span class="track-meta"><span class="artist">Regina Spektor</span><span class="dot">·</span>with Claire</span>
+                            <span class="track-platform"><i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube</span>
+                        </a></li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="year-group" id="y2015">
+                <header class="year-head">
+                    <h2>2015</h2>
+                    <span class="year-count">3 recordings</span>
+                </header>
+                <div class="year-body">
+                    <div class="year-photo"><img src="../images/music/brown-sugar.jpg" alt="" /></div>
+                    <ol class="year-tracks">
+                        <li><a href="https://soundcloud.com/paul-lisker/til-the-casket-drops" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Til the Casket Drops</span>
+                            <span class="track-meta"><span class="artist">ZZ Ward</span><span class="dot">·</span>with Claire</span>
+                            <span class="track-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span>
+                        </a></li>
+                        <li><a href="https://soundcloud.com/paul-lisker/i-know" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">I Know</span>
+                            <span class="track-meta"><span class="artist">Irma</span><span class="dot">·</span>with Claire</span>
+                            <span class="track-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span>
+                        </a></li>
+                        <li><a href="https://soundcloud.com/paul-lisker/brown-sugar-guitar-cover" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Brown Sugar</span>
+                            <span class="track-meta"><span class="artist">The Rolling Stones</span><span class="dot">·</span><span class="note">guitar cover</span></span>
+                            <span class="track-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span>
+                        </a></li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="year-group" id="y2014">
+                <header class="year-head">
+                    <h2>2014</h2>
+                    <span class="year-count">1 recording</span>
+                </header>
+                <div class="year-body">
+                    <div class="year-photo"><img src="../images/music/titanium.jpg" alt="" /></div>
+                    <ol class="year-tracks">
+                        <li><a href="https://soundcloud.com/paul-lisker/titanium" target="_blank" rel="noopener noreferrer">
+                            <span class="track-title">Titanium</span>
+                            <span class="track-meta"><span class="artist">David Guetta ft. Sia</span><span class="dot">·</span>with Claire</span>
+                            <span class="track-platform"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i>SoundCloud</span>
+                        </a></li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <ul class="socials" aria-label="Social links">
+            <li><a href="https://www.linkedin.com/in/paullisker/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+            <li><a href="https://medium.com/@paullisker" target="_blank" rel="noopener noreferrer" aria-label="Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
+            <li><a href="https://soundcloud.com/paul-lisker" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><i class="fa-brands fa-soundcloud" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.last.fm/user/paullisker" target="_blank" rel="noopener noreferrer" aria-label="Last.fm"><i class="fa-brands fa-lastfm" aria-hidden="true"></i></a></li>
+            <li><a href="mailto:music@lisker.me" aria-label="Email"><i class="fa-regular fa-envelope" aria-hidden="true"></i></a></li>
+        </ul>
+        <p class="meta">
+            © Paul Lisker. All rights reserved
+            <span class="sep">·</span> <a href="https://lisker.me/privacy_policy">Privacy</a>
+            <span class="sep">·</span> <a href="https://lisker.me/cookie_policy">Cookies</a>
+        </p>
+    </footer>
+</body>
+
+</html>
