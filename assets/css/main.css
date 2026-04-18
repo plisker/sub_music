@@ -92,11 +92,11 @@ img {
     height: auto;
 }
 
-/* Top glyph — hover swaps music-note for home icon */
+/* Top glyph — hover swaps music-note for home icon, mirroring photos.lisker.me logo */
 .glyph {
     display: flex;
     justify-content: center;
-    padding: 3rem 1rem 0.5rem;
+    padding: 3.5rem 1rem 0.5rem;
 }
 
 .glyph a {
@@ -104,8 +104,8 @@ img {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 50px;
+    width: 200px;
+    height: 60px;
     color: var(--accent);
 }
 
@@ -115,14 +115,14 @@ img {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.9rem;
-    transition: opacity 400ms ease, transform 400ms ease;
+    font-size: 3.1rem;
+    transition: opacity 500ms ease, transform 500ms ease;
 }
 
 .glyph a .fa-house {
     opacity: 0;
     transform: translateY(3px);
-    font-size: 1.55rem;
+    font-size: 2.6rem;
 }
 
 .glyph a:hover .fa-music {
@@ -169,53 +169,25 @@ img {
 .sidebar .name {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: 1.75rem;
+    font-size: 2.25rem;
     color: var(--ink);
     margin: 0;
     line-height: 1.2;
-    transition: color 400ms ease;
-    display: inline-block;
-}
-
-.sidebar a.name:hover {
-    color: var(--accent-hover);
-}
-
-.sidebar .page-label {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--muted);
-    font-size: 1.05rem;
-    margin-top: 0.2rem;
 }
 
 .sidebar .tagline {
     font-family: var(--serif);
-    font-size: 1.5rem;
-    line-height: 1.4;
+    font-size: 2rem;
+    line-height: 1.35;
     color: var(--ink);
-    margin: 2rem 0 1.25rem;
+    margin: 1.75rem 0 2rem;
     font-weight: 400;
-}
-
-.home-link {
-    font-style: italic;
-    color: var(--accent-text);
-    transition: color 400ms ease, border-color 400ms ease;
-    border-bottom: 1px solid transparent;
-    white-space: nowrap;
-}
-
-.home-link:hover {
-    color: var(--accent-hover);
-    border-bottom-color: var(--accent-hover);
 }
 
 .sidebar .socials {
     display: flex;
-    gap: 0.6rem;
-    margin: 1rem 0 0;
+    gap: 0.25rem;
+    margin: 0;
     padding: 0;
     list-style: none;
     flex-wrap: wrap;
@@ -225,11 +197,11 @@ img {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     color: var(--ink);
-    font-size: 1.1rem;
-    transition: color 400ms ease, transform 400ms ease;
+    font-size: 1.7rem;
+    transition: color 500ms ease, transform 500ms ease;
 }
 
 .sidebar .socials a:hover {
@@ -237,22 +209,15 @@ img {
     transform: translateY(-2px);
 }
 
-/* Content column */
-.content h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2.25rem, 4vw, 3rem);
-    color: var(--ink);
-    line-height: 1.15;
-    margin: 1.25rem 0 0.75rem;
-}
-
-@media (min-width: 900px) {
-    .content h1 {
-        margin-top: 3rem;
+@media (max-width: 720px) {
+    .sidebar .socials a {
+        font-size: 1.4rem;
+        width: 42px;
+        height: 42px;
     }
 }
 
+/* Content column */
 .content p {
     max-width: 620px;
     color: var(--body);
@@ -338,7 +303,7 @@ img {
     color: var(--muted);
     font-family: var(--sans);
     font-size: 0.72rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     font-weight: 500;
 }
@@ -346,22 +311,24 @@ img {
 .year-body {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.75rem;
 }
 
 @media (min-width: 720px) {
     .year-body {
-        grid-template-columns: 200px 1fr;
-        gap: 2.25rem;
+        grid-template-columns: 260px 1fr;
+        gap: 2.5rem;
         align-items: start;
     }
 }
 
 .year-photo {
+    position: relative;
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    background: var(--bg-tile);
+    background: #f2f2f2;
     max-width: 100%;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18);
 }
 
 @media (max-width: 719px) {
@@ -374,12 +341,25 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(0.92);
-    transition: transform 700ms ease, filter 700ms ease;
+    display: block;
+    transition: transform 700ms ease;
+}
+
+.year-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 500ms ease;
+    pointer-events: none;
 }
 
 .year-group:hover .year-photo img {
-    filter: saturate(1);
+    transform: scale(1.05);
+}
+
+.year-group:hover .year-photo::after {
+    background: rgba(0, 0, 0, 0.28);
 }
 
 /* Tracks */
