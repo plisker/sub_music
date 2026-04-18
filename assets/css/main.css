@@ -299,12 +299,12 @@ img {
 
 .year-group {
     position: relative;
-    margin: 0 0 3.5rem;
+    margin: 0 0 1.25rem;
     scroll-margin-top: 2rem;
 }
 
 .year-group + .year-group {
-    padding-top: 3rem;
+    padding-top: 1.25rem;
 }
 
 .year-head::before {
