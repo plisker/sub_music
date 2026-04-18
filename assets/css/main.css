@@ -2,17 +2,17 @@
 
 :root {
     --bg: #ffffff;
-    --bg-tint: #fdf4df;
+    --bg-tint: #f9ebe9;
     --bg-tile: #f4ecd9;
-    --mat: #fef7ec;
+    --mat: #fdf0f1;
     --ink: #000000;
     --body: #676767;
     --muted: #9a9a9a;
     --hairline: #ecebe7;
     --hairline-strong: #d9d5c8;
-    --accent: #f7c873;
-    --accent-text: #dfa13a;
-    --accent-hover: #b57917;
+    --accent: #d47c89;
+    --accent-text: #a63d50;
+    --accent-hover: #7a1e2e;
     --serif: "Playfair Display", Times, serif;
     --sans: "Roboto", Arial, sans-serif;
     --maxw: 1180px;
